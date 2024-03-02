@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Generator</title>
+</head>
+<body>
+    <h1>Menu Generator</h1>
+    <form id="menuForm">
+        <label for="meal">What meal will you be cooking?</label>
+        <input type="text" id="meal" name="meal"><br>
+
+        <label for="people">How many people will you be cooking for?</label>
+        <input type="number" id="people" name="people"><br>
+
+        <label for="budget">What is your budget?</label>
+        <input type="number" id="budget" name="budget"><br>
+
+        <button type="submit">Generate Menu</button>
+    </form>
+
+    <div id="menuOutput">
+        <!-- Generated menu and ingredients will be displayed here -->
+    </div>
+
+    <script>
+        document.getElementById('menuForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const meal = document.getElementById('meal').value;
+            const people = document.getElementById('people').value;
+            const budget = document.getElementById('budget').value;
+
+            const apiKey = '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';
+            const apiUrl = 'https://api.openai.com/v1/engines/davinci/completions';
+
+            const requestBody = {
+                model: "davinci",
+                prompt: `Please provide a ${meal} menu for ${people} people, with a budget not exceeding ${budget} USD per person. First, give the menu, then provide the main ingredients.`,
+                max_tokens: 150,
+                temperature: 0.7,
+                n: 1,
+                stop: ["\n"]
+            };
+
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${apiKey}`
+                },
+                body: JSON.stringify(requestBody)
+            })
+            .then(response => response.json())
+            .then(data => {
+                const menuOutput = document.getElementById('menuOutput');
+                menuOutput.innerHTML = `<p>${data.choices[0].text}</p>`;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
