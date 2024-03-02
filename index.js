@@ -1,43 +1,71 @@
 // script.js
 
-// Sample data (replace with dynamic data fetched from server)
-const listingsData = [
-    { title: "Fresh Vegetables", quantity: "10 lbs", description: "Assorted vegetables", location: "123 Main St" },
-    { title: "Canned Soup", quantity: "20 cans", description: "Various flavors", location: "456 Elm St" }
-];
+document.addEventListener("DOMContentLoaded", function() {
+    // Sample data (replace with dynamic data fetched from server)
+    const listingsData = [
+        { id: 1, title: "Fresh Vegetables", quantity: "10 lbs", description: "Assorted vegetables", location: "123 Main St", userEmail: "user1@example.com" },
+        { id: 2, title: "Canned Soup", quantity: "20 cans", description: "Various flavors", location: "456 Elm St", userEmail: "user2@example.com" }
+    ];
 
-// Function to display listings
-function displayListings() {
-    // Get the container element where listings will be displayed
-    const listingsContainer = document.getElementById("listings-container");
-    // Clear any existing content within the container
-    listingsContainer.innerHTML = "";
+    // Function to display listings
+    function displayListings() {
+        const listingsContainer = document.getElementById("listings-container");
+        listingsContainer.innerHTML = "";
 
-    // Iterate over each listing in the data array
-    listingsData.forEach(listing => {
-        // Create a new div element to represent the listing
-        const listingElement = document.createElement("div");
-        // Add the 'listing' class to the div
-        listingElement.classList.add("listing");
+        listingsData.forEach(listing => {
+            const listingElement = document.createElement("div");
+            listingElement.classList.add("spot");
 
-        // Create an h3 element to display the title of the listing
-        const titleElement = document.createElement("h3");
-        // Set the text content of the title element to the listing's title
-        titleElement.textContent = listing.title;
+            const titleElement = document.createElement("h2");
+            titleElement.textContent = listing.title;
 
-        // Create a p element to display details of the listing (quantity, description, location)
-        const detailsElement = document.createElement("p");
-        // Set the HTML content of the details element to include the listing's details
-        detailsElement.innerHTML = `<strong>Quantity:</strong> ${listing.quantity}<br><strong>Description:</strong> ${listing.description}<br><strong>Location:</strong> ${listing.location}`;
+            const detailsElement = document.createElement("p");
+            detailsElement.innerHTML = `<strong>Location:</strong> ${listing.location}<br><strong>Available:</strong> ${listing.availability}<br><strong>Description:</strong> ${listing.description}`;
 
-        // Append the title and details elements to the listing element
-        listingElement.appendChild(titleElement);
-        listingElement.appendChild(detailsElement);
+            const claimButton = document.createElement("button");
+            claimButton.classList.add("claim-button");
+            claimButton.textContent = "Claim Spot";
+            claimButton.dataset.listingId = listing.id;
+            claimButton.dataset.userEmail = listing.userEmail;
 
-        // Append the listing element to the container
-        listingsContainer.appendChild(listingElement);
+            listingElement.appendChild(titleElement);
+            listingElement.appendChild(detailsElement);
+            listingElement.appendChild(claimButton);
+
+            listingsContainer.appendChild(listingElement);
+        });
+    }
+
+    // Display initial listings
+    displayListings();
+
+    // Add event listener to claim buttons
+    document.addEventListener("click", function(event) {
+        if (event.target && event.target.classList.contains("claim-button")) {
+            const listingId = event.target.dataset.listingId;
+            const userEmail = event.target.dataset.userEmail;
+
+            fetch('/claim-spot', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ listingId, userEmail })
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Network response was not ok.');
+            })
+            .then(data => {
+                alert(data.message);
+                // You can update UI or perform other actions here
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+                alert("Failed to claim spot. Please try again later.");
+            });
+        }
     });
-}
-
-// Display initial listings
-displayListings();
+});
