@@ -2,15 +2,14 @@
 //google map stuff
 
 
-
 //https://www.google.com/maps/place/China+Sea/@39.977758,-75.178834,18z/data=!4m6!3m5!1s0x89c... location code in googlemap link @39.977758,-75.178834
 
 
 var places=[
-    {name:"a",address:"somewhere",food_type:"C",price:20,location:{ lat: -25.363, lng: 131.044 }},//change the code to the address, using google map to get the number
-    {name:"b",address:"somewhere",food_type:"C",price:50,location:{ lat: -25.363, lng: 131.045 }},//change the code to the address, using google map to get the number
-    {name:"c",address:"somewhere",food_type:"J",price:100,location:{ lat: -25.363, lng: 131.046 }},//change the code to the address, using google map to get the number
-    {name:"d",address:"somewhere",food_type:"J",price:20,location:{ lat: -25.363, lng: 131.047 }},//change the code to the address, using google map to get the number
+    {name:"Beijing Garden",address:"4527 Wayne Ave, Philadelphia, PA 19144",food_type:"Chinese",price:20,location:{ lat: 40.022581, lng: -75.1646078 }},//change the code to the address, using google map to get the number
+    {name:"Lucky Garden",address:"4215 Germantown Ave, Philadelphia, PA 19140",food_type:"Chinese",price:10,location:{ lat: 40.0184833, lng: -75.1598992 }},//change the code to the address, using google map to get the number
+    {name:"Yanako Restaurant",address:"4345 Main St, Philadelphia, PA 19127",food_type:"Japanese",price:20,location:{ lat: 40.025605, lng: -75.226073 }},//change the code to the address, using google map to get the number
+    {name:"At Ramen MNYK",address:"4357 Main St, Philadelphia, PA 19127",food_type:"Japanese",price:20,location:{ lat: 40.0257661, lng: -75.2264279 }},//change the code to the address, using google map to get the number
     {name:"e",address:"somewhere",food_type:"M",price:50,location:{ lat: -25.363, lng: 131.048 }},//change the code to the address, using google map to get the number
     {name:"f",address:"somewhere",food_type:"M",price:120,location:{ lat: -25.364, lng: 131.048 }},//change the code to the address, using google map to get the number
     {name:"g",address:"somewhere",food_type:"M",price:30,location:{ lat: -25.365, lng: 131.048 }}, //change the code to the address, using google map to get the number
@@ -71,7 +70,7 @@ var places=[
   }
   
   function initMap(ft,high,low) {
-    const myLatLng = { lat: -25.363, lng: 131.044 };//change the code to your address, using google map to get the number
+    const myLatLng = { lat: 40.0331554, lng: -75.1708688 };//change the code to your address, using google map to get the number
     
     map = new google.maps.Map(document.getElementById("map"), {
       zoom: 16,
