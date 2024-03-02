@@ -14,7 +14,7 @@
             <p><strong>Location:</strong> 123 Main St, Anytown</p>
             <p><strong>Available:</strong> Today, 4:00 PM - 6:00 PM</p>
             <p><strong>Description:</strong> Fresh produce, canned goods, and bread</p>
-            <button id= "community kitchen" class="claim-button">Claim Spot</button>
+            <button class="claim-button">Claim Spot</button>
         </div>
         <div class="spot">
             <h2>City Shelter</h2>
@@ -35,23 +35,6 @@
     <!-- Button to add new listing -->
     <button id="addListingButton">Add New Listing</button>
 
-    <script>
-        // Function to open add listing page
-        function openAddListingPage() {
-            window.open("add_listing.html", "_blank", "width=600,height=600");
-        }
-
-        // Event listener for add listing button
-        document.getElementById("addListingButton").addEventListener("click", openAddListingPage);
-
-        // Event delegation for claim buttons
-        document.querySelector('.container').addEventListener('click', function(event) {
-            if (event.target && event.target.classList.contains('claim-button')) {
-                const listingId = event.target.dataset.listingId;
-                const userEmail = event.target.dataset.userEmail;
-                // Call your function to handle claiming the spot here
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
