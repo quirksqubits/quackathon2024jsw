@@ -1,12 +1,24 @@
 #map {
     height: 100%;
+    width: 90%;
+    position: relative;
   }
-  
+
 
 html,
 body {
     height: 100%;
-    margin: 0;
-    padding: 0;
+    margin: 20px;
+    padding: 20px;
 }
-  
+
+#sub_mit{
+  margin-top: 10px;
+}
+.inputBox{
+  margin:10px;
+}
+
+.cuisine{
+  margin-bottom:10px;
+}
