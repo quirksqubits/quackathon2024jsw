@@ -30,48 +30,19 @@
             <p><strong>Description:</strong> Variety of perishable and non-perishable items</p>
             <button class="claim-button">Claim Spot</button>
         </div>
-
-        <!-- Additional Listings -->
-        <div class="spot">
-            <h2>Senior Center</h2>
-            <p><strong>Location:</strong> 321 Oak Ave, Anytown</p>
-            <p><strong>Available:</strong> Wednesday, 2:00 PM - 4:00 PM</p>
-            <p><strong>Description:</strong> Meals specially prepared for elderly residents</p>
-            <button class="claim-button">Claim Spot</button>
-        </div>
-
-        <div class="spot">
-            <h2>Local Church</h2>
-            <p><strong>Location:</strong> 555 Pine St, Anycity</p>
-            <p><strong>Available:</strong> Thursday, 3:00 PM - 5:00 PM</p>
-            <p><strong>Description:</strong> Pantry items and hot meals for those in need</p>
-            <button class="claim-button">Claim Spot</button>
-        </div>
-
-        <div class="spot">
-            <h2>Community Center</h2>
-            <p><strong>Location:</strong> 777 Maple Ave, Anystate</p>
-            <p><strong>Available:</strong> Friday, 12:00 PM - 2:00 PM</p>
-            <p><strong>Description:</strong> Assorted groceries and pre-packaged meals</p>
-            <button class="claim-button">Claim Spot</button>
-        </div>
-        <!-- End of Additional Listings -->
-
     </div>
+
+    <!-- Button to add new listing -->
+    <button id="addListingButton">Add New Listing</button>
+
     <script>
-document.addEventListener("DOMContentLoaded", function() {
-    // Select all claim buttons
-    const claimButtons = document.querySelectorAll(".claim-button");
-    
-    // Add event listener to each claim button
-    claimButtons.forEach(button => {
-        button.addEventListener("click", function() {
-            // Show alert when the button is clicked
-            alert("Spot claimed!");
-            // You can add further functionality here, such as updating UI or sending a request to claim the spot.
-                });
-            });
-        });
+        // Function to open add listing page
+        function openAddListingPage() {
+            window.open("add_listing.html", "_blank", "width=600,height=600");
+        }
+        
+        // Event listener for add listing button
+        document.getElementById("addListingButton").addEventListener("click", openAddListingPage);
     </script>
 </body>
 </html>

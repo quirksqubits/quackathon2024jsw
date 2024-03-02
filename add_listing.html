@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Listing</title>
+</head>
+<body>
+    <h1>Add New Listing</h1>
+    <form id="addListingForm">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br>
+        <label for="location">Location:</label><br>
+        <input type="text" id="location" name="location" required><br>
+        <label for="available">Available:</label><br>
+        <input type="text" id="available" name="available" required><br>
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description" required></textarea><br><br>
+        <button type="submit">Add Listing</button>
+    </form>
+
+    <script>
+        document.getElementById("addListingForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+            
+            // Get form values
+            const name = document.getElementById("name").value;
+            const location = document.getElementById("location").value;
+            const available = document.getElementById("available").value;
+            const description = document.getElementById("description").value;
+            
+            // Create new listing HTML
+            const newListingHTML = `
+                <div class="spot">
+                    <h2>${name}</h2>
+                    <p><strong>Location:</strong> ${location}</p>
+                    <p><strong>Available:</strong> ${available}</p>
+                    <p><strong>Description:</strong> ${description}</p>
+                    <button class="claim-button">Claim Spot</button>
+                </div>
+            `;
+            
+            // Append new listing to container
+            const container = window.opener.document.querySelector(".container");
+            container.insertAdjacentHTML("beforeend", newListingHTML);
+            
+            // Close the add listing window
+            window.close();
+        });
+    </script>
+</body>
+</html>
