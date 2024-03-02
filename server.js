@@ -4,7 +4,7 @@ const nodemailer = require('nodemailer');
 const path = require('path');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
@@ -12,10 +12,15 @@ app.use(bodyParser.json());
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Define a route handler for the root URL
-app.get('/', (req, res) => {
-    // Send a simple response
-    res.send('Hello, world!');
+// Configure Nodemailer with SMTP transport
+const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // true for 465, false for other ports
+    auth: {
+        user: 'food.redistribution@gmail.com',
+        pass: 'Cats0928'
+    }
 });
 
 // Define your endpoint(s) here
@@ -23,22 +28,12 @@ app.post('/claim-spot', (req, res) => {
     const { listingId, userEmail } = req.body;
 
     // Placeholder logic to process the claim request
-    if (!listingId || !userEmail) {
-        return res.status(400).json({ error: 'Invalid request. Missing data.' });
-    }
+    // ...
 
     // Example nodemailer usage to send an email
-    const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: 'your-email@gmail.com',
-            pass: 'your-email-password'
-        }
-    });
-
     const mailOptions = {
-        from: 'your-email@gmail.com',
-        to: userEmail,
+        from: 'food.redistribution@gmail.com',
+        to: 'food.redistribution@gmail.com', // Send email to your own email address
         subject: 'Spot Claimed Confirmation',
         text: `You have successfully claimed the spot with ID ${listingId}.`
     };
