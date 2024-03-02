@@ -32,19 +32,44 @@
         </div>
     </div>
     <script>
+// script.js
+
 document.addEventListener("DOMContentLoaded", function() {
-    // Select all claim buttons
     const claimButtons = document.querySelectorAll(".claim-button");
     
-    // Add event listener to each claim button
     claimButtons.forEach(button => {
         button.addEventListener("click", function() {
-            // Show alert when the button is clicked
-            alert("Spot claimed!");
-            // You can add further functionality here, such as updating UI or sending a request to claim the spot.
-                });
-            });
+            const listingId = button.dataset.listingId; // Assuming you have a data attribute for listing ID
+            
+            // Create a new XMLHttpRequest object
+            const xhr = new XMLHttpRequest();
+            
+            // Configure the request
+            xhr.open('POST', '/claim-spot', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            
+            // Set up the callback function for when the request completes
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    alert("Spot claimed! An email has been sent to the listing owner.");
+                } else {
+                    alert("Failed to claim spot. Please try again later.");
+                }
+            };
+            
+            // Handle network errors
+            xhr.onerror = function() {
+                console.error('Error claiming spot:', xhr.statusText);
+                alert("Failed to claim spot. Please try again later.");
+            };
+            
+            // Send the request with the listing ID as JSON payload
+            xhr.send(JSON.stringify({ listingId: listingId }));
         });
+    });
+});
+
+
     </script>
 </body>
 </html>
