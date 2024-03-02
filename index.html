@@ -40,9 +40,18 @@
         function openAddListingPage() {
             window.open("add_listing.html", "_blank", "width=600,height=600");
         }
-        
+
         // Event listener for add listing button
         document.getElementById("addListingButton").addEventListener("click", openAddListingPage);
+
+        // Event delegation for claim buttons
+        document.querySelector('.container').addEventListener('click', function(event) {
+            if (event.target && event.target.classList.contains('claim-button')) {
+                const listingId = event.target.dataset.listingId;
+                const userEmail = event.target.dataset.userEmail;
+                // Call your function to handle claiming the spot here
+            }
+        });
     </script>
 </body>
 </html>
