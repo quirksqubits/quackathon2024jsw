@@ -14,59 +14,37 @@
             <p><strong>Location:</strong> 123 Main St, Anytown</p>
             <p><strong>Available:</strong> Today, 4:00 PM - 6:00 PM</p>
             <p><strong>Description:</strong> Fresh produce, canned goods, and bread</p>
-            <button class="claim-button" data-listing-id="1" data-user-email="user1@example.com">Claim Spot</button>
+            <button class="claim-button">Claim Spot</button>
         </div>
         <div class="spot">
             <h2>City Shelter</h2>
             <p><strong>Location:</strong> 456 Elm St, Anycity</p>
             <p><strong>Available:</strong> Tomorrow, 10:00 AM - 12:00 PM</p>
             <p><strong>Description:</strong> Hot meals and packaged snacks</p>
-            <button class="claim-button" data-listing-id="2" data-user-email="user2@example.com">Claim Spot</button>
+            <button class="claim-button">Claim Spot</button>
         </div>
         <div class="spot">
             <h2>Local Food Bank</h2>
             <p><strong>Location:</strong> 789 Oak St, Anystate</p>
             <p><strong>Available:</strong> Monday - Friday, 9:00 AM - 5:00 PM</p>
             <p><strong>Description:</strong> Variety of perishable and non-perishable items</p>
-            <button class="claim-button" data-listing-id="3" data-user-email="user3@example.com">Claim Spot</button>
+            <button class="claim-button">Claim Spot</button>
         </div>
     </div>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const claimButtons = document.querySelectorAll(".claim-button");
-            
-            claimButtons.forEach(button => {
-                button.addEventListener("click", function() {
-                    const listingId = button.dataset.listingId; // Assuming you have a data attribute for listing ID
-                    
-                    // Create a new XMLHttpRequest object
-                    const xhr = new XMLHttpRequest();
-                    
-                    // Configure the request
-                    xhr.open('POST', 'http://localhost:3001/claim-spot', true); // Adjust the URL/port as needed
-                    xhr.setRequestHeader('Content-Type', 'application/json');
-                    
-                    // Set up the callback function for when the request completes
-                    xhr.onload = function() {
-                        if (xhr.status === 200) {
-                            alert("Spot claimed! An email has been sent to the listing owner.");
-                        } else {
-                            alert("Failed to claim spot. Please try again later.");
-                        }
-                    };
-                    
-                    // Handle network errors
-                    xhr.onerror = function() {
-                        console.error('Error claiming spot:', xhr.statusText);
-                        alert("Failed to claim spot. Please try again later.");
-                    };
-                    
-                    // Send the request with the listing ID as JSON payload
-                    xhr.send(JSON.stringify({ listingId: listingId }));
+document.addEventListener("DOMContentLoaded", function() {
+    // Select all claim buttons
+    const claimButtons = document.querySelectorAll(".claim-button");
+    
+    // Add event listener to each claim button
+    claimButtons.forEach(button => {
+        button.addEventListener("click", function() {
+            // Show alert when the button is clicked
+            alert("Spot claimed!");
+            // You can add further functionality here, such as updating UI or sending a request to claim the spot.
                 });
             });
         });
     </script>
-    <script src="script.js"></script>
 </body>
 </html>

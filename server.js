@@ -1,10 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const nodemailer = require('nodemailer');
 const path = require('path');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3003; // Update the port if necessary
 
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
@@ -12,40 +11,28 @@ app.use(bodyParser.json());
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Configure Nodemailer with SMTP transport
-const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true, // true for 465, false for other ports
-    auth: {
-        user: 'food.redistribution@gmail.com',
-        pass: 'Cats0928'
-    }
+// Middleware to enable CORS
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*'); // Allow requests from any origin
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
 });
 
 // Define your endpoint(s) here
+// OPTIONS method handler for CORS preflight requests
+app.options('/claim-spot', (req, res) => {
+    res.sendStatus(200); // Respond to preflight requests with a success status
+});
+
+// POST method handler for claiming a spot
 app.post('/claim-spot', (req, res) => {
     const { listingId, userEmail } = req.body;
 
     // Placeholder logic to process the claim request
     // ...
 
-    // Example nodemailer usage to send an email
-    const mailOptions = {
-        from: 'food.redistribution@gmail.com',
-        to: 'food.redistribution@gmail.com', // Send email to your own email address
-        subject: 'Spot Claimed Confirmation',
-        text: `You have successfully claimed the spot with ID ${listingId}.`
-    };
-
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            console.error('Error occurred while sending email:', error);
-            return res.status(500).json({ error: 'Failed to send confirmation email.' });
-        }
-        console.log('Email sent:', info.response);
-        res.status(200).json({ message: 'Spot claimed successfully. Confirmation email sent.' });
-    });
+    res.status(200).json({ message: 'Spot claimed successfully.' });
 });
 
 // Start the server
