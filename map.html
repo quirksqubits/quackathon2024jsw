@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customized restaurant search/title>
+  <link rel="stylesheet" href="map.css">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script><!--Polyfill helps provide a smoother js-->
+    <!-- jsFiddle will insert css and js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" type="text/javascript"></script>
+    <script src="map.js"></script>
+
+</head>
+<body>
+  
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+
+  <div class="container">
+    <div>range of your budget</div>
+    <div class="inputBox">
+        <input type="text" id="high" placeholder="upper range" />
+    </div>
+
+    <div class="inputBox">
+      <input id="low" type="text" placeholder="low price">
+    </div>
+    <div>the food type you want</div>
+            <select id="food_type">
+                <option value="C">Choose a food type</option>
+                <option value="C">C</option>
+                <option value="J">J</option>
+                <option value="M">M</option>
+              </select>
+
+
+            <div class="inputBox">
+                <button type="input" id="sub_mit">Submit</button>
+            </div>
+
+  </div>
+  <div id="map"></div>
+
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly"
+      defer
+    ></script>
+    
+
+</body>
+</html>
