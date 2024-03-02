@@ -52,10 +52,20 @@
                 },
                 body: JSON.stringify(requestBody)
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch. Response status: ' + response.status);
+                }
+                return response.json();
+            })
             .then(data => {
-                const menuOutput = document.getElementById('menuOutput');
-                menuOutput.innerHTML = `<p>${data.choices[0].text}</p>`;
+                console.log('Response data:', data); // Log the response data for inspection
+                if (data && data.choices && data.choices.length > 0) {
+                    const menuOutput = document.getElementById('menuOutput');
+                    menuOutput.innerHTML = `<p>${data.choices[0].text}</p>`;
+                } else {
+                    throw new Error('Invalid response format');
+                }
             })
             .catch(error => {
                 console.error('Error:', error);
