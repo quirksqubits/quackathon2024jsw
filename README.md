@@ -1,5 +1,3 @@
----
-
 # 🦆 Quackathon 2024: Food Redistribution Platform 🚀
 
 > *“Don’t just code — feed communities!”*
